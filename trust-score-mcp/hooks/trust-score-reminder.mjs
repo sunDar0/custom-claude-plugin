@@ -29,4 +29,4 @@ if (statePath && existsSync(statePath)) {
   try { score = JSON.parse(readFileSync(statePath, "utf-8")).score ?? 1000; } catch { /* default */ }
 }
 
-process.stdout.write(JSON.stringify({ systemMessage: `● ${score} | feedback→auto-score` }));
+process.stdout.write(JSON.stringify({ systemMessage: `●${score} feedback→trust_score_update` }));
