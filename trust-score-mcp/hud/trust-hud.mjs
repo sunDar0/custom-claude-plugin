@@ -35,15 +35,14 @@ function findStateFile() {
   return join(homedir(), ".claude", "mcp-servers", "trust-score", "state.json");
 }
 
-let output = "";
+let score = 1000;
 const statePath = findStateFile();
 if (existsSync(statePath)) {
   try {
     const state = JSON.parse(readFileSync(statePath, "utf-8"));
-    const score = state.score ?? 1000;
-    const emoji = score >= 900 ? "🟢" : score >= 700 ? "🟡" : "🔴";
-    output = `${emoji} ${(score / 10).toFixed(1)}%`;
+    score = state.score ?? 1000;
   } catch { /* ignore */ }
 }
 
-process.stdout.write(output);
+const emoji = score >= 900 ? "🟢" : score >= 700 ? "🟡" : "🔴";
+process.stdout.write(`${emoji} ${(score / 10).toFixed(1)}%`);
