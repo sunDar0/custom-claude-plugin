@@ -39,9 +39,8 @@ try { writeFileSync(cachePath, String(score)); } catch { /* ignore */ }
 
 const changed = lastScore === null || lastScore !== score;
 
-if (changed) {
-  process.stdout.write(`[Trust Score] ${emoji} ${score}/1000 (${zone}) — ${constraint}
-Detect feedback → trust_score_update. Negative→deduct, Positive→add, No correction+next instruction→implicit_accept(+15). No self-awarding. Specific reason required.`);
-} else {
-  process.stdout.write(`[Trust Score] ${emoji} ${score}/1000 (${zone}) — ${constraint}`);
-}
+const msg = changed
+  ? `[Trust Score] ${emoji} ${score}/1000 (${zone}) — ${constraint}\nDetect feedback → trust_score_update. Negative→deduct, Positive→add, No correction+next instruction→implicit_accept(+15). No self-awarding. Specific reason required.`
+  : `[Trust Score] ${emoji} ${score}/1000 (${zone}) — ${constraint}`;
+
+process.stdout.write(JSON.stringify({ systemMessage: msg }));
