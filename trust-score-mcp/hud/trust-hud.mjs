@@ -11,27 +11,39 @@
  *   "command": "node /path/to/trust-hud.mjs"
  */
 
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { homedir } from "node:os";
 
-const paths = [
-  process.env.TRUST_SCORE_DATA_DIR,
-  join(homedir(), ".claude", "mcp-servers", "trust-score"),
-].filter(Boolean);
+function findStateFile() {
+  for (const env of [process.env.TRUST_SCORE_DATA_DIR, process.env.CLAUDE_PLUGIN_DATA]) {
+    if (env) {
+      const p = join(env, "state.json");
+      if (existsSync(p)) return p;
+    }
+  }
+  const pluginDataDir = join(homedir(), ".claude", "plugins", "data");
+  if (existsSync(pluginDataDir)) {
+    try {
+      const match = readdirSync(pluginDataDir).find(d => d.startsWith("trust-score"));
+      if (match) {
+        const p = join(pluginDataDir, match, "state.json");
+        if (existsSync(p)) return p;
+      }
+    } catch { /* ignore */ }
+  }
+  return join(homedir(), ".claude", "mcp-servers", "trust-score", "state.json");
+}
 
 let output = "";
-for (const dir of paths) {
-  const statePath = join(dir, "state.json");
-  if (existsSync(statePath)) {
-    try {
-      const state = JSON.parse(readFileSync(statePath, "utf-8"));
-      const score = state.score ?? 1000;
-      const emoji = score >= 900 ? "🟢" : score >= 700 ? "🟡" : "🔴";
-      output = `${emoji} ${(score / 10).toFixed(1)}%`;
-    } catch { /* ignore */ }
-    break;
-  }
+const statePath = findStateFile();
+if (existsSync(statePath)) {
+  try {
+    const state = JSON.parse(readFileSync(statePath, "utf-8"));
+    const score = state.score ?? 1000;
+    const emoji = score >= 900 ? "🟢" : score >= 700 ? "🟡" : "🔴";
+    output = `${emoji} ${(score / 10).toFixed(1)}%`;
+  } catch { /* ignore */ }
 }
 
 process.stdout.write(output);

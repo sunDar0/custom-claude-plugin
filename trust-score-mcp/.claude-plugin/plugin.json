@@ -6,8 +6,5 @@
     "name": "sunDar0",
     "email": "gown4887@gmail.com"
   },
-  "repository": "https://github.com/sunDar0/custom-claude-plugin",
-  "hooks": "./hooks/hooks.json",
-  "mcpServers": "./.mcp.json",
-  "skills": "./skills/"
+  "repository": "https://github.com/sunDar0/custom-claude-plugin"
 }
