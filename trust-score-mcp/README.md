@@ -43,26 +43,24 @@ claude plugin add sunDar0/custom-claude-plugin --name trust-score
 
 ## HUD 설정
 
-### OMC 사용자 (기존 HUD에 append)
-
-`~/.claude/settings.json`:
-
-```json
-{
-  "statusLine": {
-    "type": "command",
-    "command": "bash -c 'OMC=$(node ~/.claude/hud/omc-hud.mjs 2>/dev/null); TS=$(node /path/to/trust-score-mcp/hud/trust-hud.mjs); echo \"${OMC}${TS:+ | $TS}\"'"
-  }
-}
-```
-
-### OMC 미사용자 (단독 표시)
+`~/.claude/settings.json`에 추가:
 
 ```json
 {
   "statusLine": {
     "type": "command",
     "command": "node /path/to/trust-score-mcp/hud/trust-hud.mjs"
+  }
+}
+```
+
+기존 statusLine이 있으면 파이프로 append:
+
+```json
+{
+  "statusLine": {
+    "type": "command",
+    "command": "bash -c 'EXISTING=$(기존명령 2>/dev/null); TS=$(node /path/to/trust-score-mcp/hud/trust-hud.mjs); echo \"${EXISTING}${TS:+ | $TS}\"'"
   }
 }
 ```
