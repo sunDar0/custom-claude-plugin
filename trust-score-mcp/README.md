@@ -28,14 +28,18 @@ claude plugin add sunDar0/custom-claude-plugin --name trust-score
 
 ### 수동 설치
 
+```bash
+cd /path/to/trust-score-mcp/servers && npm install
+```
+
 `~/.claude.json`에 추가:
 
 ```json
 {
   "mcpServers": {
     "trust-score": {
-      "command": "uv",
-      "args": ["run", "--directory", "/path/to/trust-score-mcp/servers", "python3", "server.py"]
+      "command": "node",
+      "args": ["/path/to/trust-score-mcp/servers/server.mjs"]
     }
   }
 }
@@ -73,8 +77,8 @@ trust-score-mcp/
 ├── .mcp.json                     # MCP 서버 설정
 ├── .hooks.json                   # Hook 설정 (피드백 자동 감지)
 ├── servers/
-│   ├── server.py                 # MCP 서버 (FastMCP, 6개 도구)
-│   └── pyproject.toml            # Python 의존성
+│   ├── server.mjs                # MCP 서버 (Node.js, 6개 도구)
+│   └── package.json              # Node.js 의존성
 ├── skills/trust-score/
 │   ├── skill.md                  # 스킬 정의 (행동 규칙)
 │   └── references/events.md      # 전체 이벤트 매핑
@@ -123,7 +127,5 @@ Hook이 "항상 활성" 기반 규칙을 보장하고, Skill이 상세 참조를
 
 ## 요구사항
 
-- Python 3.10+
-- uv (패키지 관리)
-- Node.js (HUD, Hook)
+- Node.js 18+
 

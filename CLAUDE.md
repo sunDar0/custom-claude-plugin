@@ -31,7 +31,7 @@ custom-claude-plugin/
 
 - **플러그인 디렉토리명**: `{name}-mcp` (MCP 서버 포함 시)
 - **스킬 파일명**: `skill.md` (소문자)
-- **MCP 서버**: FastMCP (Python 3.10+), `uv`로 의존성 관리
+- **MCP 서버**: `@modelcontextprotocol/sdk` (Node.js 18+), `npm`으로 의존성 관리
 - **HUD**: Node.js (ESM), `--score-only` 플래그로 기존 HUD에 append 가능하게
 - **상태 파일**: `~/.claude/mcp-servers/{plugin-name}/state.json`
 - **환경변수**: `{PLUGIN_NAME}_DATA_DIR`로 데이터 디렉토리 오버라이드
@@ -42,8 +42,8 @@ custom-claude-plugin/
 |------|------|------|
 | `.claude-plugin/plugin.json` | O | 이름, 버전, 설명, 작성자 |
 | `.mcp.json` | O | MCP 서버 실행 설정 |
-| `servers/server.py` | O | MCP 서버 본체 |
-| `servers/pyproject.toml` | O | Python 의존성 |
+| `servers/server.mjs` | O | MCP 서버 본체 |
+| `servers/package.json` | O | Node.js 의존성 |
 | `skills/*/skill.md` | O | 스킬 정의 (1개 이상) |
 | `README.md` | O | 문서 |
 | `LICENSE` | - | 라이선스 (선택) |

@@ -1,8 +1,8 @@
 {
   "mcpServers": {
     "trust-score": {
-      "command": "uv",
-      "args": ["run", "--directory", "${CLAUDE_PLUGIN_ROOT}/servers", "python3", "server.py"],
+      "command": "node",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/servers/server.mjs"],
       "env": {
         "TRUST_SCORE_DATA_DIR": "${CLAUDE_PLUGIN_DATA}"
       }

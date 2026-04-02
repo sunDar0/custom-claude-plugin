@@ -1,6 +1,3 @@
-__pycache__/
-.venv/
+node_modules/
 .omc/
-*.pyc
-uv.lock
 .claude
