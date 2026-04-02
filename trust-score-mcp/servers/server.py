@@ -104,19 +104,8 @@ def trust_score_read() -> str:
     history_count = len(state["history"])
     recent = state["history"][-3:] if state["history"] else []
 
-    result = {
-        "score": score,
-        "max": 1000,
-        "zone": zone["label"],
-        "emoji": zone["emoji"],
-        "constraint": zone["constraint"],
-        "total_events": history_count,
-        "recent_events": [
-            {"event": h["event_label"], "delta": h["delta"], "time": h["timestamp"]}
-            for h in recent
-        ],
-    }
-    return json.dumps(result, ensure_ascii=False, indent=2)
+    recent_str = ", ".join(f"{h['delta']:+d}({h['event_label']})" for h in recent)
+    return f"{zone['emoji']} {score}/1000 [{zone['label']}] {zone['constraint']} | 이벤트:{history_count}건 | 최근: {recent_str or '없음'}"
 
 
 @mcp.tool()
@@ -158,19 +147,8 @@ def trust_score_update(event_id: str, reason: str = "") -> str:
     new_zone = _get_zone(new_score)
     zone_changed = old_zone["label"] != new_zone["label"]
 
-    result = {
-        "score": new_score,
-        "delta": event["score"],
-        "event": event["label"],
-        "reason": reason,
-        "zone": new_zone["label"],
-        "emoji": new_zone["emoji"],
-        "constraint": new_zone["constraint"],
-    }
-    if zone_changed:
-        result["zone_change"] = f"{old_zone['emoji']} {old_zone['label']} → {new_zone['emoji']} {new_zone['label']}"
-
-    return json.dumps(result, ensure_ascii=False, indent=2)
+    zone_msg = f" ⚠️ {old_zone['emoji']}{old_zone['label']}→{new_zone['emoji']}{new_zone['label']}" if zone_changed else ""
+    return f"{new_zone['emoji']} {new_score}/1000 ({event['score']:+d} {event['label']}){zone_msg}"
 
 
 @mcp.tool()
