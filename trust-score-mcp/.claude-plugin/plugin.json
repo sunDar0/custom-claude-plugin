@@ -7,5 +7,7 @@
     "email": "gown4887@gmail.com"
   },
   "repository": "https://github.com/sunDar0/custom-claude-plugin",
-  "license": "MIT"
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json",
+  "skills": "./skills/"
 }
