@@ -1,0 +1,30 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "sunDar0-plugins",
+  "description": "sunDar0의 Claude Code 플러그인 모음",
+  "version": "1.0.0",
+  "owner": {
+    "name": "sunDar0",
+    "email": "gown4887@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "trust-score",
+      "description": "Claude Code용 AI 신뢰 점수 관리 플러그인. 1000점 기준 감점/가점 이벤트 추적, HUD 실시간 표시, 점수 구간별 행동 제약 적용.",
+      "version": "1.0.0",
+      "author": {
+        "name": "sunDar0",
+        "email": "gown4887@gmail.com"
+      },
+      "source": "./trust-score-mcp",
+      "category": "productivity",
+      "homepage": "https://github.com/sunDar0/custom-claude-plugin",
+      "tags": [
+        "trust-score",
+        "hud",
+        "ai-governance",
+        "scoring"
+      ]
+    }
+  ]
+}

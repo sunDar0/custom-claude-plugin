@@ -3,8 +3,8 @@
   "description": "AI 신뢰 점수 관리 플러그인. 1000점 기준으로 감점/가점 이벤트를 추적하고 HUD에 실시간 표시. 임계값 기반 행동 제약 적용.",
   "version": "1.0.0",
   "author": {
-    "name": "ted.gwon",
-    "email": "ted.gwon@kakaovx.com"
+    "name": "sunDar0",
+    "email": "gown4887@gmail.com"
   },
   "repository": "https://github.com/sunDar0/custom-claude-plugin",
   "license": "MIT"
