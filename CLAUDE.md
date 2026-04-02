@@ -46,7 +46,7 @@ custom-claude-plugin/
 | `servers/pyproject.toml` | O | Python 의존성 |
 | `skills/*/skill.md` | O | 스킬 정의 (1개 이상) |
 | `README.md` | O | 문서 |
-| `LICENSE` | O | 라이선스 |
+| `LICENSE` | - | 라이선스 (선택) |
 | `hud/*.mjs` | - | HUD 컴포넌트 (선택) |
 
 ## 마켓플레이스 등록

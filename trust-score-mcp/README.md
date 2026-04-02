@@ -129,6 +129,3 @@ Hook이 "항상 활성" 기반 규칙을 보장하고, Skill이 상세 참조를
 - uv (패키지 관리)
 - Node.js (HUD, Hook)
 
-## License
-
-MIT
